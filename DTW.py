@@ -1,5 +1,5 @@
 import numpy as np
-from Featurize import featurize
+
 
 def DTWDistance(features1, features2, sakoe_chiba_bandwidth = 40):
     n = features1.shape[1]

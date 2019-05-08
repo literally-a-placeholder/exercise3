@@ -1,29 +1,16 @@
-import os
 from multiprocessing import Pool, cpu_count
 from functools import partial
-from skimage import io
-from tqdm import tqdm
-import crop
-from Otsu_binarize import otsu_binarize
 from run_task_helpers import *
 import normalize_results
 import evaluation
 
 
 def main():
-    # crop and resize
-    if not os.path.isdir('cropped'):
-        crop.main()
 
-    # binarize
-    if not os.path.isdir('binarized'):
-        os.mkdir("binarized")
-        print('Starting binarization...')
-        for img in tqdm(os.listdir('cropped/')):
-            filepath = 'cropped/' + img
-            bin_img = otsu_binarize(filepath)
-            io.imsave('binarized/' + img, bin_img)
-        print('Binarization done.')
+    # TODO: this whole workflow need to be adjusted to the new data structure!
+    # template from last task still below as a reference...
+
+    # preprocessing
 
     # list and store some paths and ids
     train_pages, valid_pages = get_train_valid_page_nrs()

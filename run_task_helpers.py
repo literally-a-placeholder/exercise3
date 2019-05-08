@@ -1,6 +1,5 @@
 import os
 import glob
-from math import log
 from tqdm import tqdm
 import numpy as np
 from Featurize import featurize
