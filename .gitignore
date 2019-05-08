@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+## end of autocreated .gitignore, manual additions following
+
+.idea/
