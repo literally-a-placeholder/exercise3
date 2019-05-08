@@ -1,9 +1,24 @@
-# Keyword Spotting Data
+# Signature Verification
 
 ## Task ##
-Your task is to develop a machine learning approach for spotting keywords in the provided documents.
-You can test your approach on the provided training and validation dataset where you find a list of
-keywords that you can find for certain at least once in each set.
+Provided are signatures of 30 writers
+
+Enrollment: 5 genuine signatures each<br>
+Verification: 45 signatures each (20 genuine, 25 forgeries)<br>
+Ground truth in verification-gt.txt
+
+The goal is to compute dissimilarity for each verification signature
+with respect to the 5 genuine ones and return a list of all signatures
+sorted based on their score and evaluate how good the system performs
+in detecting real signatures and differentiate them from the fake ones.
+
+Recommendations:
+- DTW
+- Features: x, y, vx, vy, pressure
+- vx, vy: velocity in x and y with respect to Δt
+- Normalize for each signature individually
+- Sakoe-Chiba band can be helpful
+- Evaluation: mean average-precision
 
 ## Run ##
 Clone the project and run the following command from the root folder to install all dependencies.
@@ -36,48 +51,30 @@ pip freeze > requirements.txt
 ```
 
 ## Data ##
-In this repository you'll find all the data necessary for your KeywordSpotting Task.
 
-You find the following folders:
+In this repository you'll find all the data necessary for the Signature Verification Task.
 
+You find the following data inside the 'signaturedata' directory:
 
-### ground-truth ###
-Contains ground-truth data.
+### enrollment ###
 
-#### transcription.txt ####
+All genuine signatures of all 30 writers (5 each) as txt files in the following format:
 
-Contains the transcription of all words (on a character level) of the whole dataset. The Format is
-as follows:
+rows: data points for each time step<br>
+columns: t , x , y , pressure , penup , azimuth , inclination
 
-	- XXX-YY-ZZ: XXX = Document Number, YY = Line Number, ZZ = Word Number
-	- Contains the character-wise transcription of the word (letters seperated with dashes)
-	- Special characters denoted with s_
-		- numbers (s_x)
-		- punctuation (s_pt, s_cm, ...)
-		- strong s (s_s)
-		- hyphen (s_mi)
-		- semicolon (s_sq)
-		- apostrophe (s_qt)
-		- colon (s_qo)
+- Penup 1 if change between pen-up and pen-down
+- Azimuth / inclination --> angles of the pen
 
-#### locations #####
+### verification ###
 
-Contains bounding boxes for all words in the svg-format.
+45 signatures for each writer (e.g. 20 genuine, 25 forgeries,
+exact numbers and identification unknown!)
 
-	- XXX.svg: File containing the bounding boxes for the given documents
-	- **id** contains the same XXX-YY-ZZ naming as above
+Same txt file format as enrollment data.
 
-### images ###
+### 'gt.txt' and 'users.txt'
 
-Contains the original images in jpg-format.
+gt.txt: ground truth of all the verification data for performance evaluation
 
-### task ###
-Contains three files:
-
-####train.txt / valid.txt ####
-Contains a splitting of the documents into a training and a validation set.
-
-
-#### keywords.txt ####
-Contains a list of keywords of which each will be at least **once** in the training and validation
-dataset.
+users.txt: ids of writers (here 000 - 030)
