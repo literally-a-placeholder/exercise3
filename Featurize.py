@@ -1,23 +1,17 @@
 import numpy as np
-from PIL import Image
 from sklearn import preprocessing
 
 
 def main():
-    feat_270_01_02 = featurize('otsu_sample/otsu_270-01-02.png')
-    print(feat_270_01_02)
-    norm_feat_270_01_02 = featurize('otsu_sample/otsu_270-01-02.png', minmax=True)
-    print(norm_feat_270_01_02)
+    fet = featurize('signaturedata/enrollment/001-g-01.txt')
+    print(fet)
 
 
-def featurize(img, minmax=False):
-    img = np.asarray(Image.open(img), dtype='uint8')
+def featurize(filename, minmax=False):
 
-    feature_mat = np.zeros((4, 100))
-    func_list = [lower_contour, upper_contour, bw_transitions, fraction_of_bw_between_uclc]
+    signature_data = np.loadtxt(filename)
 
-    for i, func in enumerate(func_list):
-        feature_mat[i] = np.apply_along_axis(func, axis=0, arr=img)
+    feature_mat = signature_data
 
     if minmax:
         feature_mat = min_max_normalize(feature_mat)
