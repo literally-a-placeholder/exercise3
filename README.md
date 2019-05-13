@@ -78,3 +78,21 @@ Same txt file format as enrollment data.
 gt.txt: ground truth of all the verification data for performance evaluation
 
 users.txt: ids of writers (here 000 - 030)
+
+### Expected Output
+
+- ASCII plaintext file
+- One line per user (can be sorted by dissimilarity)
+
+```
+user1, signature_ID11, dissimilarity11, signature_ID12, dissimilarity12, ...
+user2, signature_ID21, dissimilarity21, signature_ID22, dissimilarity22, ...
+```
+
+Example:
+
+```
+051, 46, 6.40341144, 21, 7.62949846, 17, 9.18516724, 03, 10.47132116, […]
+043, 02, 0.99152807, 22, 4.82357323, 14, 2.14435743, 42, 5.05044537, […]
+[…]
+```

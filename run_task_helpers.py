@@ -6,6 +6,46 @@ from Featurize import featurize
 from DTW import DTWDistance
 
 
+def dissimilarity_for_one_user(user_id):
+    enrollment_paths, verification_paths = get_signature_paths(user_id)
+
+    result = {}
+    print('\nCalculating dissimilarities for user \'{}\'...'.format(user_id))
+
+    for verification_index, verification_path in enumerate(tqdm(verification_paths)):
+
+        distances_to_enrollment = [np.inf] * len(enrollment_paths)
+        for i, enrollment_path in enumerate(enrollment_paths):
+            distances_to_enrollment[i] = DTWDistance(featurize(verification_path, minmax=True),
+                                                     featurize(enrollment_path, minmax=True))
+
+        lowest_dist = min(distances_to_enrollment)
+        result[verification_paths[verification_index]] = lowest_dist
+
+    return result
+
+
+def get_signature_paths(user_id):
+    enrollment_ids = glob.glob('signaturedata/enrollment/' + str(user_id) + '*')
+
+    verification_ids = glob.glob('signaturedata/enrollment/' + str(user_id) + '*')
+
+    return enrollment_ids, verification_ids
+
+
+def get_user_ids():
+    with open('signaturedata/users.txt', 'r') as f:
+        user_ids = []
+        for line in f:
+            user_ids.append(line.rstrip('\n'))
+
+    return user_ids
+
+
+# ================================================
+# functions of task 2 - keyword spotting:
+
+
 def get_train_valid_page_nrs():
     with open('task/train.txt', 'r') as f:
         train_pages = []

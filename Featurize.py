@@ -5,18 +5,20 @@ from sklearn import preprocessing
 def main():
     fet = featurize('signaturedata/enrollment/001-g-01.txt')
     fet_norm = featurize('signaturedata/enrollment/001-g-01.txt', minmax=True)
-    for i,val in enumerate(fet):
+    print('\nExample feature matrix:\n')
+    for i, val in enumerate(fet):
         print(i)
         print(val)
-    for i,val in enumerate(fet_norm):
+    print('\nExample feature matrix normalized:\n')
+    for i, val in enumerate(fet_norm):
         print(i)
         print(val)
 
 
-def featurize(filename, minmax=False):
+def featurize(signature_path, minmax=False):
 
     # load and transpose
-    signature_data = np.loadtxt(filename).T
+    signature_data = np.loadtxt(signature_path).T
 
     # get dt, the time interval/step between each measurement
     time_step = signature_data[0, 1] - signature_data[0, 0]
