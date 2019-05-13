@@ -4,57 +4,30 @@ from sklearn import preprocessing
 
 def main():
     fet = featurize('signaturedata/enrollment/001-g-01.txt')
+    fet_norm = featurize('signaturedata/enrollment/001-g-01.txt', minmax=True)
     print(fet)
+    print(fet_norm)
 
 
 def featurize(filename, minmax=False):
 
-    signature_data = np.loadtxt(filename)
+    # load and transpose
+    signature_data = np.loadtxt(filename).T
 
-    feature_mat = signature_data
+    # get dt, the time interval/step between each measurement
+    time_step = signature_data[0, 1] - signature_data[0, 0]
+
+    # calculate 2 new features, the velocity in x and y respectively with respect to dt
+    vx = np.diff(signature_data[2], prepend=signature_data[2, 0]) / time_step
+    vy = np.diff(signature_data[2], prepend=signature_data[2, 0]) / time_step
+
+    # combine to one feature matrix and remove index 0 (the discrete time point measure)
+    feature_mat = np.vstack((signature_data, vx, vy))[1:]
 
     if minmax:
         feature_mat = min_max_normalize(feature_mat)
 
     return feature_mat
-
-
-# __________ feature calculations __________
-def lower_contour(img_col):
-    result = 0
-    zeros_indices = np.where(img_col == 0)[0]
-    if zeros_indices.size != 0:
-        result = np.amax(zeros_indices)
-    return result
-
-
-def upper_contour(img_col):
-    result = img_col.size
-    zeros_indices = np.where(img_col == 0)[0]
-    if zeros_indices.size != 0:
-        result = np.amin(zeros_indices)
-    return result
-
-
-def bw_transitions(img_col):
-    old_val = img_col[0]
-    transitions = 0
-    for val in img_col:
-        if val != old_val:
-            transitions += 1
-        old_val = val
-    return transitions
-
-
-def fraction_of_bw_between_uclc(img_col):
-    result = 0
-    upp = upper_contour(img_col)
-    low = lower_contour(img_col)
-    between_uclc = img_col[upp:low+1]
-    if between_uclc.size != 0:
-        result = np.count_nonzero(between_uclc) / between_uclc.size * 100
-    return result
-# __________________________________________
 
 
 def min_max_normalize(feature_mat):
