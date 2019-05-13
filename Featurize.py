@@ -5,8 +5,12 @@ from sklearn import preprocessing
 def main():
     fet = featurize('signaturedata/enrollment/001-g-01.txt')
     fet_norm = featurize('signaturedata/enrollment/001-g-01.txt', minmax=True)
-    print(fet)
-    print(fet_norm)
+    for i,val in enumerate(fet):
+        print(i)
+        print(val)
+    for i,val in enumerate(fet_norm):
+        print(i)
+        print(val)
 
 
 def featurize(filename, minmax=False):
@@ -31,9 +35,10 @@ def featurize(filename, minmax=False):
 
 
 def min_max_normalize(feature_mat):
-    minmax_scale = preprocessing.MinMaxScaler().fit(feature_mat)
-    df_minmax = minmax_scale.transform(feature_mat)
-    return df_minmax
+    # MinMaxScaler is a bit clunky to use; sklearn.preprocessing.minmax_scale is more convenient.
+    # This operates along columns, so use the transpose (and transpose back after scaling):
+    scaled_features = preprocessing.minmax_scale(feature_mat.T).T
+    return scaled_features
 
 
 if __name__ == '__main__':
