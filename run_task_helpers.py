@@ -28,7 +28,7 @@ def dissimilarity_for_one_user(user_id):
 def get_signature_paths(user_id):
     enrollment_ids = glob.glob('signaturedata/enrollment/' + str(user_id) + '*')
 
-    verification_ids = glob.glob('signaturedata/enrollment/' + str(user_id) + '*')
+    verification_ids = glob.glob('signaturedata/verification/' + str(user_id) + '*')
 
     return enrollment_ids, verification_ids
 
