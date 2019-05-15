@@ -29,6 +29,9 @@ def main():
         for signature, dist in user.items():
             print(signature, dist, sep='\t')
 
+    # save results in specified format (see README) in txt file
+    save_results(result, user_ids, 'results/')
+
     # calculate precision/recall
     # normalize_results.main()
     # evaluation.main()

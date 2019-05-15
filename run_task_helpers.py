@@ -42,6 +42,24 @@ def get_user_ids():
     return user_ids
 
 
+def save_results(list_of_distance_dicts, user_ids, target_dir):
+
+    if not os.path.isdir(target_dir):
+        os.mkdir(target_dir)
+
+    with open('{}/results.txt'.format(target_dir), 'w') as f:
+
+        for i, user in enumerate(list_of_distance_dicts):
+
+            user_result_string = user_ids[i]
+            for key, value in sorted(user.items(), key=lambda item: item[1], reverse=False):
+                user_result_string += ', ' + str(key)[-6:-4] + ', ' + str(value)  # key-indexing -> only signature id
+
+            f.write(user_result_string + '\n')
+
+    return user_result_string
+
+
 # ================================================
 # functions of task 2 - keyword spotting:
 
