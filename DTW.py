@@ -12,7 +12,7 @@ def DTWDistance(features1, features2, sakoe_chiba_bandwidth = 40):
         i = a + 1
         for b in range(m):
             j = b + 1
-            if (max(i-j, j-i) > sakoe_chiba_bandwidth/2):
+            if (max(i*m/n-j, j-i*m/n) > sakoe_chiba_bandwidth/2):
                 continue
             cost = np.linalg.norm(features1[:,a] - features2[:,b])
             dtw[i,j] = cost + min(dtw[i-1,j], dtw[i-1,j-1], dtw[i,j-1])
