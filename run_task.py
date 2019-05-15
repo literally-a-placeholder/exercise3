@@ -16,8 +16,18 @@ def main():
     # for each user, compare all verification signatures to all genuine enrollment signatures
     # and save sorted results (dissimilarity measures)
     print('\nCompute all dissimilarities between verification and enrollment for each user...\n')
-    tmpres = dissimilarity_for_one_user('001')
-    print(tmpres)
+
+    ### REMOVE LINE BELOW WHEN DONE WITH TESTING!
+    user_ids = user_ids[:1]
+
+    result = []
+    for user_id in user_ids:
+        result.append(dissimilarity_for_one_user(user_id))
+
+    ### REMOVE LINES BELOW WHEN DONE WITH TESTING!
+    for user in result:
+        for signature, dist in user.items():
+            print(signature, dist, sep='\t')
 
     # calculate precision/recall
     # normalize_results.main()
