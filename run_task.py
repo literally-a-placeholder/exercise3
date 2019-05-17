@@ -12,7 +12,7 @@ def main():
     print('\nCompute all dissimilarities between verification and enrollment for each user...\n')
 
     result = []
-    for user_id in user_ids[:3]:
+    for user_id in user_ids:
         result.append(dissimilarity_for_one_user(user_id))
 
     # save results in specified format (see README) in txt file
