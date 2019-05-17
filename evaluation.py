@@ -24,7 +24,6 @@ def main():
     # take only pages 300-304
     transcr = transcr[2433:, :]
 
-    # range limit from manual evaluation of our results (see comments in 'normalize_results.py)
     # norm_res: (8.5, 11.1, 0.1) ; res: (5, 25, 1) AND CHANGE > TO < for checking the threshold on line ~64
     for i in tqdm(np.arange(8.5, 11.1, 0.1)):
 

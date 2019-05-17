@@ -1,5 +1,4 @@
 from run_task_helpers import *
-import normalize_results
 import evaluation
 
 
@@ -20,8 +19,7 @@ def main():
     save_results(result, user_ids, 'results/', normalize=True)
 
     # calculate precision/recall
-    # normalize_results.main()
-    # evaluation.main()
+    # evaluation.main()  # TODO: uncomment as soon as evaluation is finished
 
 
 if __name__ == '__main__':
