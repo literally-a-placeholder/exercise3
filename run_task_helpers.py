@@ -42,14 +42,21 @@ def get_user_ids():
     return user_ids
 
 
-def save_results(list_of_distance_dicts, user_ids, target_dir):
+def save_results(list_of_distance_dicts, user_ids, target_dir, normalize=False):
 
     if not os.path.isdir(target_dir):
         os.mkdir(target_dir)
 
-    with open('{}/results.txt'.format(target_dir), 'w') as f:
+    postfix = ''
+    if normalize:
+        postfix = '_norm'
+
+    with open('{}/results{}.txt'.format(target_dir, postfix), 'w') as f:
 
         for i, user in enumerate(list_of_distance_dicts):
+
+            if normalize:
+                user = normalize_dict_values(user)
 
             user_result_string = user_ids[i]
             for key, value in sorted(user.items(), key=lambda item: item[1], reverse=False):
@@ -58,6 +65,11 @@ def save_results(list_of_distance_dicts, user_ids, target_dir):
             f.write(user_result_string + '\n')
 
     return user_result_string
+
+
+def normalize_dict_values(d, target=1.0):
+    factor = target / sum(d.values())
+    return {key: value*factor for key, value in d.items()}
 
 
 # ================================================
