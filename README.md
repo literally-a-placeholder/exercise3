@@ -29,18 +29,6 @@ pip install -r requirements.txt
 
 Execute 'run_task.py'
 
-Sidenotes:
-
-- only 105 results are generated, of 107 specified keywords in keywords.txt, since the two words
-'order' and 'waggons' appear each in upper and lower case, which is ignored.
-- optionally run 'normalize_results' after the calculation to evaluate its effect on precision and
-recall. (trying to account for keywords with naturally higher distances than others, could lead to
-better results in general)
-- the resulting plot from the evaluation is still not entierly correct (start of the line should be
-at a precision value of 1 on the left side), due to some unresolved bugs
-
-See overall precision/recall-plot 'plot_norm_results_overall.png' for the most recent evaluation.
-
 ## Install new Packages ##
 Make sure to install new packages using the following commands in order to make sure that the
 dependencies are listed in the requirements.txt file:
