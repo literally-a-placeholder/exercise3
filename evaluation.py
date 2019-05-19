@@ -24,7 +24,7 @@ def main():
 
 
     #go through different thresholds i
-    for i in tqdm(np.arange(0, 0.1, 0.001)):
+    for i in tqdm(np.arange(0, 0.1, 0.00001)):
 
         tp = 0
         fp = 0
