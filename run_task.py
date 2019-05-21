@@ -6,7 +6,7 @@ import evaluation
 def main():
 
     # list and store some paths and ids
-    user_ids = get_user_ids()
+    user_ids = get_user_ids('test')
 
     # for each user, compare all verification signatures to all genuine enrollment signatures
     # and save sorted results (dissimilarity measures)

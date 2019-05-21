@@ -33,8 +33,9 @@ def get_signature_paths(user_id):
     return enrollment_ids, verification_ids
 
 
-def get_user_ids():
-    with open('signaturedata/users.txt', 'r') as f:
+def get_user_ids(mode='valid'):
+    path = 'signaturedata/users_' + mode + '.txt'
+    with open(path, 'r') as f:
         user_ids = []
         for line in f:
             user_ids.append(line.rstrip('\n'))
