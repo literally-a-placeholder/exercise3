@@ -20,6 +20,17 @@ Recommendations:
 - Sakoe-Chiba band can be helpful
 - Evaluation: mean average-precision
 
+## Competition ##
+The results from the competition (started on 21st of May, 2019) are located in the 'results_test' directory.
+
+Containing:
+- 'results.txt': sorted list for all keywords with sorted raw euclidean distances
+- 'results_norm.txt': sorted list for all users/writers with sorted normalized dissimilarity measures (to account for innate differences in distances for different lengths of signature data). This is the intended output. Only use the raw distances if problems occur with further analysis.
+
+To get the best results use the 'results_norm.txt' for precision/recall analysis of the system.
+
+Output format as specified in the lecture (see below under 'Expected Output').
+
 ## Run ##
 Clone the project and run the following command from the root folder to install all dependencies.
 
