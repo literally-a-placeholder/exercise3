@@ -40,6 +40,9 @@ pip install -r requirements.txt
 
 Execute 'run_task.py'
 
+Results of the validation data is located in 'results_valid':
+![valid_eval](results_valid/validation_evaluation.png?raw=true "valid_eval")
+
 ## Install new Packages ##
 Make sure to install new packages using the following commands in order to make sure that the
 dependencies are listed in the requirements.txt file:

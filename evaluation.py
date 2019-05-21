@@ -8,7 +8,7 @@ from tqdm import tqdm
 def main():
     ################################################
 
-    file = np.genfromtxt('results/results_norm.txt', delimiter=',', dtype=str)
+    file = np.genfromtxt('results_valid/results_norm.txt', delimiter=',', dtype=str)
     score = []
 
     #reate an array, that has the same structure as gf
